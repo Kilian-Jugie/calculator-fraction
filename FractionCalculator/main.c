@@ -40,6 +40,7 @@ void ctest() {
 		++success;
 		free(op);
 		printFraction(fret);
+		printf("\n");
 		deleteFraction(fret);
 		deleteFraction(f1);
 		deleteFraction(f2);

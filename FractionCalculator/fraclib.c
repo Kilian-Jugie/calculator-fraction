@@ -47,7 +47,7 @@ fraction* createFractionFromInput() {
 	num = atoi(buffer);
 	++i;
 	while (i < size) {
-		buffer[i - opIndex] = input[i];
+		buffer[i - opIndex-1] = input[i];
 		++i;
 	}
 	buffer[i - opIndex-1] = '\0';
@@ -58,12 +58,12 @@ fraction* createFractionFromInput() {
 }
 
 fraction* fadd(fraction* f1, fraction* f2) {
-	if (f1->denom != f2->denom) {
-		f1->num *= f2->denom;
-		f2->num *= f1->denom;
-		f1->denom = f2->denom = f1->denom*f2->denom;
-	}
-	return simplify(createFraction(f1->num+f2->num, f1->denom));
+	fraction* ret;
+	if (f1->denom != f2->denom)
+		ret = createFraction(f1->num*f2->denom + f2->num*f1->denom, f1->denom*f2->denom);
+	else
+		ret = createFraction( f1->num + f2->num, f1->denom );
+	return simplify(ret);
 }
 
 fraction* fsub(fraction* f1, fraction* f2) {
